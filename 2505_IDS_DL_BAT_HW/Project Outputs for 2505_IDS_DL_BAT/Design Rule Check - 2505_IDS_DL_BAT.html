@@ -1,0 +1,757 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD25\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">15-10-2025</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">21:24:56</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc" class="file"><acronym title="E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc">E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">136</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">PCB Health Issues:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+</table>
+</td>
+</table><a name="IDURT41EOYM05YFQMSWY33DUU1IHQWW25JIJO2B4EUKOIBBRAQ325N"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDW231SHTA1CQHNEDJYGPRASYJJHCI3F4J2YGZ1JVLFQDM35OSFRL">Clearance Constraint (Gap=0.203mm) (All),(All)</a></td>
+<td class="column2">119</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKW50HUL3QS1VCIWV4BHAPQG0MI51PSJFWSO4P3W0VN0SAR1BCSO">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDESRHMIF2OJALKWTINMXRMRW5NZY1RR3XS2ALTM33WMVF5FW3FOE">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQQWGQHQX135ZFMJG0UWHNQXBDOKSC54TQZ1SKGEK0FOEINCPOQUJ">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUFJ53E4U532EGXSCQHCQ5KJNENVKYFPLIGN4ABVLWJ04APRMUDN">Width Constraint (Min=0.254mm) (Max=1mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4O0SQVNEMAUNPBS5R2EIRJKUUOKTPFHJA5KLUQFMVIVRU5WKLI4K">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPZDOJLX3AVCGMO203E3NOJNYNFV5YDMRMN0O0XIR2O3OD21YBHBK">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDPHYWHRMJ2MHQE4OFUB45Y3VCHLUWFPUVBWBFY5NMSMCWFTYUDJTO">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDU3PB0UDMMNCVKAHZNH0DIZRR3CUZTFCBNNQ3TDPOOVTJ3XAU5A2K">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2JC3PQYTO2TYKL2KK3FFXHK1ED0NQVDPWPFDGVI30VLXICFAACHM">Minimum Solder Mask Sliver (Gap=0.127mm) (All),(All)</a></td>
+<td class="column2">17</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXZUWEQVQKIBRIIXQKEKQGR0QMPDAXX04OVP5HPGDA4R4Q1YYBR1M">Silk To Solder Mask (Clearance=0mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRKRT2D0JLKQEGLLOJKQLIVV0SI1K0GQNT3YOM4FRFZDK5L2MZMVF">Silk to Silk (Clearance=0.127mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNQTGISUFU2HDKI4CE510Y0P35FUG3RSQ2XWX3ILWO4LGFNZ35XOE">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3SXNBQEOLKVPMBN4VN1AWJVQ3KK4OE130HY240GCWXFRWEGM0K5D">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">136</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">PCB Health Issues</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><a name="IDW231SHTA1CQHNEDJYGPRASYJJHCI3F4J2YGZ1JVLFQDM35OSFRL"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=0.203mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11896.355mil|Location2.X=11906.682mil|Location1.Y=6768.525mil|Location2.Y=6778.923mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11896.355mil|Location2.X=11906.682mil|Location1.Y=6768.525mil|Location2.Y=6778.923mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-10(28.218mm,69.042mm) on Bottom Layer And Track (27.865mm,69.396mm)(30.486mm,72.018mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11912.306mil|Location2.X=11922.633mil|Location1.Y=6726.127mil|Location2.Y=6736.525mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11912.306mil|Location2.X=11922.633mil|Location1.Y=6726.127mil|Location2.Y=6736.525mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-11(28.572mm,68.689mm) on Bottom Layer And Track (28.925mm,68.335mm)(28.933mm,68.335mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11939.449mil|Location2.X=11949.776mil|Location1.Y=6725.431mil|Location2.Y=6735.828mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11939.449mil|Location2.X=11949.776mil|Location1.Y=6725.431mil|Location2.Y=6735.828mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-12(28.925mm,68.335mm) on Bottom Layer And Track (29.279mm,67.981mm)(30.284mm,68.986mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11925.107mil|Location2.X=11935.434mil|Location1.Y=6713.616mil|Location2.Y=6724.014mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11925.107mil|Location2.X=11935.434mil|Location1.Y=6713.616mil|Location2.Y=6724.014mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-13(29.279mm,67.981mm) on Bottom Layer And Track (28.925mm,68.335mm)(28.933mm,68.335mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11938.185mil|Location2.X=11948.512mil|Location1.Y=6726.695mil|Location2.Y=6737.092mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11938.185mil|Location2.X=11948.512mil|Location1.Y=6726.695mil|Location2.Y=6737.092mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-13(29.279mm,67.981mm) on Bottom Layer And Track (28.933mm,68.335mm)(29.718mm,69.12mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.145mil|Location2.X=11950.472mil|Location1.Y=6698.288mil|Location2.Y=6708.686mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.145mil|Location2.X=11950.472mil|Location1.Y=6698.288mil|Location2.Y=6708.686mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-13(29.279mm,67.981mm) on Bottom Layer And Track (29.632mm,67.628mm)(29.658mm,67.628mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11952.032mil|Location2.X=11962.359mil|Location1.Y=6712.848mil|Location2.Y=6723.245mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11952.032mil|Location2.X=11962.359mil|Location1.Y=6712.848mil|Location2.Y=6723.245mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-14(29.632mm,67.628mm) on Bottom Layer And Track (29.279mm,67.981mm)(30.284mm,68.986mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11954.065mil|Location2.X=11964.392mil|Location1.Y=6684.368mil|Location2.Y=6694.766mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11954.065mil|Location2.X=11964.392mil|Location1.Y=6684.368mil|Location2.Y=6694.766mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-14(29.632mm,67.628mm) on Bottom Layer And Track (29.986mm,67.274mm)(30.012mm,67.274mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11953.496mil|Location2.X=11963.823mil|Location1.Y=6685.96mil|Location2.Y=6696.358mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11953.496mil|Location2.X=11963.823mil|Location1.Y=6685.96mil|Location2.Y=6696.358mil|Absolute=True">Clearance Constraint: (0.18mm &lt; 0.203mm) Between Pad U1-15(29.986mm,67.274mm) on Bottom Layer And Track (29.632mm,67.628mm)(29.658mm,67.628mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11966.208mil|Location2.X=11976.535mil|Location1.Y=6698.672mil|Location2.Y=6709.07mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11966.208mil|Location2.X=11976.535mil|Location1.Y=6698.672mil|Location2.Y=6709.07mil|Absolute=True">Clearance Constraint: (0.18mm &lt; 0.203mm) Between Pad U1-15(29.986mm,67.274mm) on Bottom Layer And Track (29.658mm,67.628mm)(30.356mm,68.326mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.984mil|Location2.X=11978.311mil|Location1.Y=6670.449mil|Location2.Y=6680.847mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.984mil|Location2.X=11978.311mil|Location1.Y=6670.449mil|Location2.Y=6680.847mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-15(29.986mm,67.274mm) on Bottom Layer And Track (30.34mm,66.921mm)(30.34mm,66.921mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.984mil|Location2.X=11978.311mil|Location1.Y=6670.449mil|Location2.Y=6680.847mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.984mil|Location2.X=11978.311mil|Location1.Y=6670.449mil|Location2.Y=6680.847mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-15(29.986mm,67.274mm) on Bottom Layer And Track (30.34mm,66.921mm)(30.34mm,66.921mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.984mil|Location2.X=11978.311mil|Location1.Y=6670.449mil|Location2.Y=6680.847mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.984mil|Location2.X=11978.311mil|Location1.Y=6670.449mil|Location2.Y=6680.847mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-15(29.986mm,67.274mm) on Bottom Layer And Track (30.34mm,66.921mm)(34.519mm,62.742mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.415mil|Location2.X=11977.742mil|Location1.Y=6672.041mil|Location2.Y=6682.439mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11967.415mil|Location2.X=11977.742mil|Location1.Y=6672.041mil|Location2.Y=6682.439mil|Absolute=True">Clearance Constraint: (0.18mm &lt; 0.203mm) Between Pad U1-16(30.34mm,66.921mm) on Bottom Layer And Track (29.986mm,67.274mm)(30.012mm,67.274mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11980.127mil|Location2.X=11990.454mil|Location1.Y=6684.753mil|Location2.Y=6695.151mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11980.127mil|Location2.X=11990.454mil|Location1.Y=6684.753mil|Location2.Y=6695.151mil|Absolute=True">Clearance Constraint: (0.18mm &lt; 0.203mm) Between Pad U1-16(30.34mm,66.921mm) on Bottom Layer And Track (30.012mm,67.274mm)(30.606mm,67.869mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11954.203mil|Location2.X=11964.601mil|Location1.Y=6530.629mil|Location2.Y=6540.956mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11954.203mil|Location2.X=11964.601mil|Location1.Y=6530.629mil|Location2.Y=6540.956mil|Absolute=True">Clearance Constraint: (0.18mm &lt; 0.203mm) Between Pad U1-18(30.004mm,63.757mm) on Bottom Layer And Track (29.65mm,63.403mm)(29.676mm,63.403mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11953.436mil|Location2.X=11963.833mil|Location1.Y=6530.885mil|Location2.Y=6541.212mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11953.436mil|Location2.X=11963.833mil|Location1.Y=6530.885mil|Location2.Y=6541.212mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-18(30.004mm,63.757mm) on Bottom Layer And Track (29.65mm,63.403mm)(30.221mm,62.833mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11968.691mil|Location2.X=11979.089mil|Location1.Y=6546.141mil|Location2.Y=6556.467mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11968.691mil|Location2.X=11979.089mil|Location1.Y=6546.141mil|Location2.Y=6556.467mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-18(30.004mm,63.757mm) on Bottom Layer And Track (30.357mm,64.11mm)(30.357mm,64.11mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11981.915mil|Location2.X=11992.312mil|Location1.Y=6532.917mil|Location2.Y=6543.244mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11981.915mil|Location2.X=11992.312mil|Location1.Y=6532.917mil|Location2.Y=6543.244mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-18(30.004mm,63.757mm) on Bottom Layer And Track (30.357mm,64.11mm)(31.044mm,63.424mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11941.476mil|Location2.X=11951.874mil|Location1.Y=6545.372mil|Location2.Y=6555.699mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11941.476mil|Location2.X=11951.874mil|Location1.Y=6545.372mil|Location2.Y=6555.699mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-19(29.65mm,63.403mm) on Bottom Layer And Track (28.999mm,64.754mm)(29.997mm,63.757mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11952.74mil|Location2.X=11963.137mil|Location1.Y=6503.742mil|Location2.Y=6514.069mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11952.74mil|Location2.X=11963.137mil|Location1.Y=6503.742mil|Location2.Y=6514.069mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-19(29.65mm,63.403mm) on Bottom Layer And Track (29.297mm,63.05mm)(32.098mm,60.249mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11771.776mil|Location2.X=11782.103mil|Location1.Y=6866.657mil|Location2.Y=6877.055mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11771.776mil|Location2.X=11782.103mil|Location1.Y=6866.657mil|Location2.Y=6877.055mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-2(25.39mm,71.871mm) on Bottom Layer And Track (25.036mm,72.224mm)(25.036mm,72.224mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11784.999mil|Location2.X=11795.326mil|Location1.Y=6879.881mil|Location2.Y=6890.279mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11784.999mil|Location2.X=11795.326mil|Location1.Y=6879.881mil|Location2.Y=6890.279mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-2(25.39mm,71.871mm) on Bottom Layer And Track (25.036mm,72.224mm)(25.819mm,73.007mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11800.255mil|Location2.X=11810.582mil|Location1.Y=6864.625mil|Location2.Y=6875.023mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11800.255mil|Location2.X=11810.582mil|Location1.Y=6864.625mil|Location2.Y=6875.023mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-2(25.39mm,71.871mm) on Bottom Layer And Track (25.743mm,71.517mm)(27.765mm,73.539mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11925.597mil|Location2.X=11935.995mil|Location1.Y=6503.046mil|Location2.Y=6513.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11925.597mil|Location2.X=11935.995mil|Location1.Y=6503.046mil|Location2.Y=6513.373mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-20(29.297mm,63.05mm) on Bottom Layer And Track (28.943mm,62.696mm)(32.178mm,59.461mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.852mil|Location2.X=11951.25mil|Location1.Y=6518.302mil|Location2.Y=6528.629mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.852mil|Location2.X=11951.25mil|Location1.Y=6518.302mil|Location2.Y=6528.629mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-20(29.297mm,63.05mm) on Bottom Layer And Track (29.65mm,63.403mm)(29.676mm,63.403mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11954.076mil|Location2.X=11964.474mil|Location1.Y=6505.078mil|Location2.Y=6515.405mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11954.076mil|Location2.X=11964.474mil|Location1.Y=6505.078mil|Location2.Y=6515.405mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-20(29.297mm,63.05mm) on Bottom Layer And Track (29.65mm,63.403mm)(30.221mm,62.833mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11924.901mil|Location2.X=11935.299mil|Location1.Y=6475.903mil|Location2.Y=6486.23mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11924.901mil|Location2.X=11935.299mil|Location1.Y=6475.903mil|Location2.Y=6486.23mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-21(28.943mm,62.696mm) on Bottom Layer And Track (28.59mm,62.343mm)(32.233mm,58.699mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.156mil|Location2.X=11950.554mil|Location1.Y=6491.159mil|Location2.Y=6501.486mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11940.156mil|Location2.X=11950.554mil|Location1.Y=6491.159mil|Location2.Y=6501.486mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-21(28.943mm,62.696mm) on Bottom Layer And Track (29.297mm,63.05mm)(32.098mm,60.249mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11910.981mil|Location2.X=11921.379mil|Location1.Y=6461.984mil|Location2.Y=6472.311mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11910.981mil|Location2.X=11921.379mil|Location1.Y=6461.984mil|Location2.Y=6472.311mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-22(28.59mm,62.343mm) on Bottom Layer And Track (28.236mm,61.989mm)(32.389mm,57.836mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11926.237mil|Location2.X=11936.635mil|Location1.Y=6477.239mil|Location2.Y=6487.566mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11926.237mil|Location2.X=11936.635mil|Location1.Y=6477.239mil|Location2.Y=6487.566mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-22(28.59mm,62.343mm) on Bottom Layer And Track (28.943mm,62.696mm)(32.178mm,59.461mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11897.062mil|Location2.X=11907.46mil|Location1.Y=6448.064mil|Location2.Y=6458.391mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11897.062mil|Location2.X=11907.46mil|Location1.Y=6448.064mil|Location2.Y=6458.391mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-23(28.236mm,61.989mm) on Bottom Layer And Track (27.883mm,61.635mm)(32.743mm,56.775mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11912.318mil|Location2.X=11922.715mil|Location1.Y=6463.32mil|Location2.Y=6473.647mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11912.318mil|Location2.X=11922.715mil|Location1.Y=6463.32mil|Location2.Y=6473.647mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-23(28.236mm,61.989mm) on Bottom Layer And Track (28.59mm,62.343mm)(32.233mm,58.699mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11883.142mil|Location2.X=11893.54mil|Location1.Y=6434.145mil|Location2.Y=6444.472mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11883.142mil|Location2.X=11893.54mil|Location1.Y=6434.145mil|Location2.Y=6444.472mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-24(27.883mm,61.635mm) on Bottom Layer And Track (27.529mm,61.282mm)(32.493mm,56.318mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11898.398mil|Location2.X=11908.796mil|Location1.Y=6449.401mil|Location2.Y=6459.728mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11898.398mil|Location2.X=11908.796mil|Location1.Y=6449.401mil|Location2.Y=6459.728mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-24(27.883mm,61.635mm) on Bottom Layer And Track (28.236mm,61.989mm)(32.389mm,57.836mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11869.223mil|Location2.X=11879.621mil|Location1.Y=6420.225mil|Location2.Y=6430.552mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11869.223mil|Location2.X=11879.621mil|Location1.Y=6420.225mil|Location2.Y=6430.552mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-25(27.529mm,61.282mm) on Bottom Layer And Track (27.175mm,60.928mm)(33.875mm,54.229mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11884.479mil|Location2.X=11894.877mil|Location1.Y=6435.481mil|Location2.Y=6445.808mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11884.479mil|Location2.X=11894.877mil|Location1.Y=6435.481mil|Location2.Y=6445.808mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-25(27.529mm,61.282mm) on Bottom Layer And Track (27.883mm,61.635mm)(32.743mm,56.775mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11855.304mil|Location2.X=11865.701mil|Location1.Y=6406.306mil|Location2.Y=6416.633mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11855.304mil|Location2.X=11865.701mil|Location1.Y=6406.306mil|Location2.Y=6416.633mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-26(27.175mm,60.928mm) on Bottom Layer And Track (26.822mm,60.575mm)(33.858mm,53.539mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.559mil|Location2.X=11880.957mil|Location1.Y=6421.562mil|Location2.Y=6431.889mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11870.559mil|Location2.X=11880.957mil|Location1.Y=6421.562mil|Location2.Y=6431.889mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-26(27.175mm,60.928mm) on Bottom Layer And Track (27.529mm,61.282mm)(32.493mm,56.318mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11828.161mil|Location2.X=11838.559mil|Location1.Y=6405.61mil|Location2.Y=6415.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11828.161mil|Location2.X=11838.559mil|Location1.Y=6405.61mil|Location2.Y=6415.937mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-27(26.822mm,60.575mm) on Bottom Layer And Track (26.468mm,60.214mm)(26.468mm,60.221mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11856.64mil|Location2.X=11867.038mil|Location1.Y=6407.642mil|Location2.Y=6417.969mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11856.64mil|Location2.X=11867.038mil|Location1.Y=6407.642mil|Location2.Y=6417.969mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-27(26.822mm,60.575mm) on Bottom Layer And Track (27.175mm,60.928mm)(33.875mm,54.229mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11801.09mil|Location2.X=11811.488mil|Location1.Y=6404.986mil|Location2.Y=6415.313mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11801.09mil|Location2.X=11811.488mil|Location1.Y=6404.986mil|Location2.Y=6415.313mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-28(26.468mm,60.221mm) on Bottom Layer And Track (21.311mm,64.679mm)(26.115mm,59.875mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11814.169mil|Location2.X=11824.567mil|Location1.Y=6391.908mil|Location2.Y=6402.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11814.169mil|Location2.X=11824.567mil|Location1.Y=6391.908mil|Location2.Y=6402.235mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-28(26.468mm,60.221mm) on Bottom Layer And Track (26.115mm,59.868mm)(26.115mm,59.875mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11842.72mil|Location2.X=11853.118mil|Location1.Y=6393.723mil|Location2.Y=6404.05mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11842.72mil|Location2.X=11853.118mil|Location1.Y=6393.723mil|Location2.Y=6404.05mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-28(26.468mm,60.221mm) on Bottom Layer And Track (26.822mm,60.575mm)(33.858mm,53.539mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11787.098mil|Location2.X=11797.496mil|Location1.Y=6390.995mil|Location2.Y=6401.322mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11787.098mil|Location2.X=11797.496mil|Location1.Y=6390.995mil|Location2.Y=6401.322mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-29(26.115mm,59.868mm) on Bottom Layer And Track (20.726mm,64.549mm)(25.761mm,59.514mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11815.65mil|Location2.X=11826.048mil|Location1.Y=6392.81mil|Location2.Y=6403.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11815.65mil|Location2.X=11826.048mil|Location1.Y=6392.81mil|Location2.Y=6403.137mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-29(26.115mm,59.868mm) on Bottom Layer And Track (26.468mm,60.214mm)(26.468mm,60.221mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11828.729mil|Location2.X=11839.126mil|Location1.Y=6379.731mil|Location2.Y=6390.058mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11828.729mil|Location2.X=11839.126mil|Location1.Y=6379.731mil|Location2.Y=6390.058mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-29(26.115mm,59.868mm) on Bottom Layer And Track (26.468mm,60.214mm)(27.417mm,59.266mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11800.951mil|Location2.X=11811.278mil|Location1.Y=6837.482mil|Location2.Y=6847.88mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11800.951mil|Location2.X=11811.278mil|Location1.Y=6837.482mil|Location2.Y=6847.88mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-3(25.743mm,71.517mm) on Bottom Layer And Track (26.097mm,71.163mm)(26.104mm,71.163mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11801.658mil|Location2.X=11812.056mil|Location1.Y=6379.107mil|Location2.Y=6389.434mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11801.658mil|Location2.X=11812.056mil|Location1.Y=6379.107mil|Location2.Y=6389.434mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-30(25.761mm,59.514mm) on Bottom Layer And Track (26.115mm,59.868mm)(26.115mm,59.875mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11787.739mil|Location2.X=11798.137mil|Location1.Y=6365.188mil|Location2.Y=6375.515mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11787.739mil|Location2.X=11798.137mil|Location1.Y=6365.188mil|Location2.Y=6375.515mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-31(25.408mm,59.161mm) on Bottom Layer And Track (20.726mm,64.549mm)(25.761mm,59.514mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11772.483mil|Location2.X=11782.881mil|Location1.Y=6349.932mil|Location2.Y=6360.259mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11772.483mil|Location2.X=11782.881mil|Location1.Y=6349.932mil|Location2.Y=6360.259mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-31(25.408mm,59.161mm) on Bottom Layer And Track (25.054mm,58.807mm)(25.054mm,58.807mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11785.706mil|Location2.X=11796.104mil|Location1.Y=6336.709mil|Location2.Y=6347.036mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11785.706mil|Location2.X=11796.104mil|Location1.Y=6336.709mil|Location2.Y=6347.036mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-31(25.408mm,59.161mm) on Bottom Layer And Track (25.054mm,58.807mm)(25.936mm,57.925mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11760.523mil|Location2.X=11770.921mil|Location1.Y=6364.42mil|Location2.Y=6374.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11760.523mil|Location2.X=11770.921mil|Location1.Y=6364.42mil|Location2.Y=6374.747mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-32(25.054mm,58.807mm) on Bottom Layer And Track (24.719mm,59.842mm)(25.4mm,59.161mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11646.501mil|Location2.X=11656.828mil|Location1.Y=6351.638mil|Location2.Y=6362.036mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11646.501mil|Location2.X=11656.828mil|Location1.Y=6351.638mil|Location2.Y=6362.036mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-33(22.208mm,58.789mm) on Bottom Layer And Track (21.854mm,59.143mm)(21.854mm,59.15mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11661.061mil|Location2.X=11671.388mil|Location1.Y=6363.526mil|Location2.Y=6373.923mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11661.061mil|Location2.X=11671.388mil|Location1.Y=6363.526mil|Location2.Y=6373.923mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-34(21.854mm,59.143mm) on Bottom Layer And Track (22.208mm,58.789mm)(23.546mm,60.127mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11605.439mil|Location2.X=11615.766mil|Location1.Y=6366.254mil|Location2.Y=6376.652mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11605.439mil|Location2.X=11615.766mil|Location1.Y=6366.254mil|Location2.Y=6376.652mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-35(21.501mm,59.496mm) on Bottom Layer And Track (19.253mm,57.956mm)(21.147mm,59.85mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11605.511mil|Location2.X=11615.838mil|Location1.Y=6366.181mil|Location2.Y=6376.579mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11605.511mil|Location2.X=11615.838mil|Location1.Y=6366.181mil|Location2.Y=6376.579mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-35(21.501mm,59.496mm) on Bottom Layer And Track (20.396mm,59.091mm)(21.147mm,59.842mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11618.59mil|Location2.X=11628.917mil|Location1.Y=6379.26mil|Location2.Y=6389.658mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11618.59mil|Location2.X=11628.917mil|Location1.Y=6379.26mil|Location2.Y=6389.658mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-35(21.501mm,59.496mm) on Bottom Layer And Track (21.147mm,59.842mm)(21.147mm,59.85mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11633.99mil|Location2.X=11644.317mil|Location1.Y=6364.439mil|Location2.Y=6374.837mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11633.99mil|Location2.X=11644.317mil|Location1.Y=6364.439mil|Location2.Y=6374.837mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-35(21.501mm,59.496mm) on Bottom Layer And Track (21.854mm,59.143mm)(21.854mm,59.15mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11647.069mil|Location2.X=11657.396mil|Location1.Y=6377.517mil|Location2.Y=6387.915mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11647.069mil|Location2.X=11657.396mil|Location1.Y=6377.517mil|Location2.Y=6387.915mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-35(21.501mm,59.496mm) on Bottom Layer And Track (21.854mm,59.15mm)(22.86mm,60.156mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11591.519mil|Location2.X=11601.846mil|Location1.Y=6380.173mil|Location2.Y=6390.571mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11591.519mil|Location2.X=11601.846mil|Location1.Y=6380.173mil|Location2.Y=6390.571mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-36(21.147mm,59.85mm) on Bottom Layer And Track (18.466mm,57.876mm)(20.794mm,60.203mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11577.6mil|Location2.X=11587.927mil|Location1.Y=6394.093mil|Location2.Y=6404.49mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11577.6mil|Location2.X=11587.927mil|Location1.Y=6394.093mil|Location2.Y=6404.49mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-37(20.794mm,60.203mm) on Bottom Layer And Track (17.247mm,57.363mm)(20.44mm,60.557mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11592.855mil|Location2.X=11603.183mil|Location1.Y=6378.837mil|Location2.Y=6389.235mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11592.855mil|Location2.X=11603.183mil|Location1.Y=6378.837mil|Location2.Y=6389.235mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-37(20.794mm,60.203mm) on Bottom Layer And Track (19.253mm,57.956mm)(21.147mm,59.85mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11606.079mil|Location2.X=11616.406mil|Location1.Y=6392.06mil|Location2.Y=6402.458mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11606.079mil|Location2.X=11616.406mil|Location1.Y=6392.06mil|Location2.Y=6402.458mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-37(20.794mm,60.203mm) on Bottom Layer And Track (21.147mm,59.842mm)(21.147mm,59.85mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11563.68mil|Location2.X=11574.007mil|Location1.Y=6408.012mil|Location2.Y=6418.41mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11563.68mil|Location2.X=11574.007mil|Location1.Y=6408.012mil|Location2.Y=6418.41mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-38(20.44mm,60.557mm) on Bottom Layer And Track (16.434mm,57.258mm)(20.086mm,60.91mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11578.936mil|Location2.X=11589.263mil|Location1.Y=6392.756mil|Location2.Y=6403.154mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11578.936mil|Location2.X=11589.263mil|Location1.Y=6392.756mil|Location2.Y=6403.154mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-38(20.44mm,60.557mm) on Bottom Layer And Track (18.466mm,57.876mm)(20.794mm,60.203mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11565.017mil|Location2.X=11575.344mil|Location1.Y=6406.676mil|Location2.Y=6417.074mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11565.017mil|Location2.X=11575.344mil|Location1.Y=6406.676mil|Location2.Y=6417.074mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-39(20.086mm,60.91mm) on Bottom Layer And Track (17.247mm,57.363mm)(20.44mm,60.557mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11812.838mil|Location2.X=11823.165mil|Location1.Y=6852.042mil|Location2.Y=6862.44mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11812.838mil|Location2.X=11823.165mil|Location1.Y=6852.042mil|Location2.Y=6862.44mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-4(26.097mm,71.163mm) on Bottom Layer And Track (25.743mm,71.517mm)(27.765mm,73.539mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11535.842mil|Location2.X=11546.169mil|Location1.Y=6435.851mil|Location2.Y=6446.249mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11535.842mil|Location2.X=11546.169mil|Location1.Y=6435.851mil|Location2.Y=6446.249mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-40(19.733mm,61.264mm) on Bottom Layer And Track (15.697mm,57.935mm)(19.379mm,61.618mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11551.097mil|Location2.X=11561.424mil|Location1.Y=6420.595mil|Location2.Y=6430.993mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11551.097mil|Location2.X=11561.424mil|Location1.Y=6420.595mil|Location2.Y=6430.993mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-40(19.733mm,61.264mm) on Bottom Layer And Track (16.434mm,57.258mm)(20.086mm,60.91mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11521.922mil|Location2.X=11532.249mil|Location1.Y=6449.77mil|Location2.Y=6460.168mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11521.922mil|Location2.X=11532.249mil|Location1.Y=6449.77mil|Location2.Y=6460.168mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-41(19.379mm,61.618mm) on Bottom Layer And Track (15.24mm,58.185mm)(19.026mm,61.971mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11508.003mil|Location2.X=11518.33mil|Location1.Y=6463.69mil|Location2.Y=6474.087mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11508.003mil|Location2.X=11518.33mil|Location1.Y=6463.69mil|Location2.Y=6474.087mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-42(19.026mm,61.971mm) on Bottom Layer And Track (14.656mm,58.308mm)(18.672mm,62.325mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11523.258mil|Location2.X=11533.585mil|Location1.Y=6448.434mil|Location2.Y=6458.832mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11523.258mil|Location2.X=11533.585mil|Location1.Y=6448.434mil|Location2.Y=6458.832mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-42(19.026mm,61.971mm) on Bottom Layer And Track (15.697mm,57.935mm)(19.379mm,61.618mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11509.339mil|Location2.X=11519.666mil|Location1.Y=6462.354mil|Location2.Y=6472.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11509.339mil|Location2.X=11519.666mil|Location1.Y=6462.354mil|Location2.Y=6472.751mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-43(18.672mm,62.325mm) on Bottom Layer And Track (15.24mm,58.185mm)(19.026mm,61.971mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11494.083mil|Location2.X=11504.41mil|Location1.Y=6477.609mil|Location2.Y=6488.007mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11494.083mil|Location2.X=11504.41mil|Location1.Y=6477.609mil|Location2.Y=6488.007mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-43(18.672mm,62.325mm) on Bottom Layer And Track (15.61mm,59.969mm)(18.319mm,62.678mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11495.42mil|Location2.X=11505.747mil|Location1.Y=6476.273mil|Location2.Y=6486.671mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11495.42mil|Location2.X=11505.747mil|Location1.Y=6476.273mil|Location2.Y=6486.671mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-44(18.319mm,62.678mm) on Bottom Layer And Track (14.656mm,58.308mm)(18.672mm,62.325mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11480.164mil|Location2.X=11490.491mil|Location1.Y=6491.529mil|Location2.Y=6501.926mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11480.164mil|Location2.X=11490.491mil|Location1.Y=6491.529mil|Location2.Y=6501.926mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-44(18.319mm,62.678mm) on Bottom Layer And Track (15.233mm,60.3mm)(17.965mm,63.032mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.245mil|Location2.X=11476.572mil|Location1.Y=6505.448mil|Location2.Y=6515.846mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.245mil|Location2.X=11476.572mil|Location1.Y=6505.448mil|Location2.Y=6515.846mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-45(17.965mm,63.032mm) on Bottom Layer And Track (15.085mm,60.858mm)(17.612mm,63.385mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11481.5mil|Location2.X=11491.827mil|Location1.Y=6490.192mil|Location2.Y=6500.59mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11481.5mil|Location2.X=11491.827mil|Location1.Y=6490.192mil|Location2.Y=6500.59mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-45(17.965mm,63.032mm) on Bottom Layer And Track (15.61mm,59.969mm)(18.319mm,62.678mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11467.581mil|Location2.X=11477.908mil|Location1.Y=6504.112mil|Location2.Y=6514.51mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11467.581mil|Location2.X=11477.908mil|Location1.Y=6504.112mil|Location2.Y=6514.51mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-46(17.612mm,63.385mm) on Bottom Layer And Track (15.233mm,60.3mm)(17.965mm,63.032mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11453.661mil|Location2.X=11463.988mil|Location1.Y=6518.031mil|Location2.Y=6528.429mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11453.661mil|Location2.X=11463.988mil|Location1.Y=6518.031mil|Location2.Y=6528.429mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-47(17.258mm,63.739mm) on Bottom Layer And Track (15.085mm,60.858mm)(17.612mm,63.385mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11438.406mil|Location2.X=11448.733mil|Location1.Y=6533.287mil|Location2.Y=6543.685mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11438.406mil|Location2.X=11448.733mil|Location1.Y=6533.287mil|Location2.Y=6543.685mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-47(17.258mm,63.739mm) on Bottom Layer And Track (16.096mm,63.284mm)(16.904mm,64.092mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11451.629mil|Location2.X=11461.956mil|Location1.Y=6546.51mil|Location2.Y=6556.908mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11451.629mil|Location2.X=11461.956mil|Location1.Y=6546.51mil|Location2.Y=6556.908mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-47(17.258mm,63.739mm) on Bottom Layer And Track (16.904mm,64.092mm)(16.904mm,64.092mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.116mil|Location2.X=11476.443mil|Location1.Y=6558.47mil|Location2.Y=6568.868mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.116mil|Location2.X=11476.443mil|Location1.Y=6558.47mil|Location2.Y=6568.868mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-48(16.904mm,64.092mm) on Bottom Layer And Track (17.258mm,63.746mm)(18.353mm,64.841mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11440.449mil|Location2.X=11450.847mil|Location1.Y=6684.639mil|Location2.Y=6694.966mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11440.449mil|Location2.X=11450.847mil|Location1.Y=6684.639mil|Location2.Y=6694.966mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-49(16.922mm,66.939mm) on Bottom Layer And Track (16.488mm,68.081mm)(17.276mm,67.292mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11813.751mil|Location2.X=11824.078mil|Location1.Y=6824.971mil|Location2.Y=6835.369mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11813.751mil|Location2.X=11824.078mil|Location1.Y=6824.971mil|Location2.Y=6835.369mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-5(26.45mm,70.81mm) on Bottom Layer And Track (26.097mm,71.163mm)(26.104mm,71.163mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11826.83mil|Location2.X=11837.157mil|Location1.Y=6838.05mil|Location2.Y=6848.448mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11826.83mil|Location2.X=11837.157mil|Location1.Y=6838.05mil|Location2.Y=6848.448mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-5(26.45mm,70.81mm) on Bottom Layer And Track (26.104mm,71.163mm)(26.834mm,71.894mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11454.369mil|Location2.X=11464.766mil|Location1.Y=6698.558mil|Location2.Y=6708.885mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11454.369mil|Location2.X=11464.766mil|Location1.Y=6698.558mil|Location2.Y=6708.885mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-50(17.276mm,67.292mm) on Bottom Layer And Track (15.949mm,69.326mm)(17.63mm,67.646mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11439.113mil|Location2.X=11449.511mil|Location1.Y=6683.303mil|Location2.Y=6693.63mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11439.113mil|Location2.X=11449.511mil|Location1.Y=6683.303mil|Location2.Y=6693.63mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-50(17.276mm,67.292mm) on Bottom Layer And Track (16.162mm,67.699mm)(16.922mm,66.939mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11452.336mil|Location2.X=11462.734mil|Location1.Y=6670.079mil|Location2.Y=6680.406mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11452.336mil|Location2.X=11462.734mil|Location1.Y=6670.079mil|Location2.Y=6680.406mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-50(17.276mm,67.292mm) on Bottom Layer And Track (16.922mm,66.939mm)(16.922mm,66.939mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11468.288mil|Location2.X=11478.686mil|Location1.Y=6712.478mil|Location2.Y=6722.805mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11468.288mil|Location2.X=11478.686mil|Location1.Y=6712.478mil|Location2.Y=6722.805mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-51(17.63mm,67.646mm) on Bottom Layer And Track (16.158mm,69.825mm)(17.983mm,67.999mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.256mil|Location2.X=11476.654mil|Location1.Y=6683.999mil|Location2.Y=6694.326mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.256mil|Location2.X=11476.654mil|Location1.Y=6683.999mil|Location2.Y=6694.326mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-51(17.63mm,67.646mm) on Bottom Layer And Track (16.488mm,68.081mm)(17.276mm,67.292mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.952mil|Location2.X=11477.349mil|Location1.Y=6711.141mil|Location2.Y=6721.468mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11466.952mil|Location2.X=11477.349mil|Location1.Y=6711.141mil|Location2.Y=6721.468mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-52(17.983mm,67.999mm) on Bottom Layer And Track (15.949mm,69.326mm)(17.63mm,67.646mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11482.207mil|Location2.X=11492.605mil|Location1.Y=6726.397mil|Location2.Y=6736.724mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11482.207mil|Location2.X=11492.605mil|Location1.Y=6726.397mil|Location2.Y=6736.724mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-52(17.983mm,67.999mm) on Bottom Layer And Track (15.951mm,70.739mm)(18.337mm,68.353mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11494.094mil|Location2.X=11504.492mil|Location1.Y=6711.837mil|Location2.Y=6722.164mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11494.094mil|Location2.X=11504.492mil|Location1.Y=6711.837mil|Location2.Y=6722.164mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-53(18.337mm,68.353mm) on Bottom Layer And Track (16.158mm,69.825mm)(17.983mm,67.999mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11510.046mil|Location2.X=11520.444mil|Location1.Y=6754.236mil|Location2.Y=6764.563mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11510.046mil|Location2.X=11520.444mil|Location1.Y=6754.236mil|Location2.Y=6764.563mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-54(18.69mm,68.707mm) on Bottom Layer And Track (14.63mm,73.473mm)(19.044mm,69.06mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11494.79mil|Location2.X=11505.188mil|Location1.Y=6738.98mil|Location2.Y=6749.307mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11494.79mil|Location2.X=11505.188mil|Location1.Y=6738.98mil|Location2.Y=6749.307mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-54(18.69mm,68.707mm) on Bottom Layer And Track (15.951mm,70.739mm)(18.337mm,68.353mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11537.189mil|Location2.X=11547.587mil|Location1.Y=6754.932mil|Location2.Y=6765.259mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11537.189mil|Location2.X=11547.587mil|Location1.Y=6754.932mil|Location2.Y=6765.259mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-55(19.044mm,69.06mm) on Bottom Layer And Track (15.164mm,73.647mm)(19.397mm,69.414mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11522.629mil|Location2.X=11533.027mil|Location1.Y=6766.819mil|Location2.Y=6777.146mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11522.629mil|Location2.X=11533.027mil|Location1.Y=6766.819mil|Location2.Y=6777.146mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-56(19.397mm,69.414mm) on Bottom Layer And Track (14.63mm,73.473mm)(19.044mm,69.06mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11537.885mil|Location2.X=11548.283mil|Location1.Y=6782.075mil|Location2.Y=6792.402mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11537.885mil|Location2.X=11548.283mil|Location1.Y=6782.075mil|Location2.Y=6792.402mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-56(19.397mm,69.414mm) on Bottom Layer And Track (15.672mm,73.846mm)(19.751mm,69.767mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11536.549mil|Location2.X=11546.947mil|Location1.Y=6780.739mil|Location2.Y=6791.065mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11536.549mil|Location2.X=11546.947mil|Location1.Y=6780.739mil|Location2.Y=6791.065mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-57(19.751mm,69.767mm) on Bottom Layer And Track (15.164mm,73.647mm)(19.397mm,69.414mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11551.805mil|Location2.X=11562.202mil|Location1.Y=6795.994mil|Location2.Y=6806.321mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11551.805mil|Location2.X=11562.202mil|Location1.Y=6795.994mil|Location2.Y=6806.321mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-57(19.751mm,69.767mm) on Bottom Layer And Track (16.256mm,73.969mm)(20.104mm,70.121mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11550.468mil|Location2.X=11560.866mil|Location1.Y=6794.658mil|Location2.Y=6804.985mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11550.468mil|Location2.X=11560.866mil|Location1.Y=6794.658mil|Location2.Y=6804.985mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-58(20.104mm,70.121mm) on Bottom Layer And Track (15.672mm,73.846mm)(19.751mm,69.767mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11578.947mil|Location2.X=11589.345mil|Location1.Y=6796.69mil|Location2.Y=6807.017mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11578.947mil|Location2.X=11589.345mil|Location1.Y=6796.69mil|Location2.Y=6807.017mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-58(20.104mm,70.121mm) on Bottom Layer And Track (16.83mm,74.103mm)(20.458mm,70.474mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11564.388mil|Location2.X=11574.785mil|Location1.Y=6808.577mil|Location2.Y=6818.904mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11564.388mil|Location2.X=11574.785mil|Location1.Y=6808.577mil|Location2.Y=6818.904mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-59(20.458mm,70.474mm) on Bottom Layer And Track (16.256mm,73.969mm)(20.104mm,70.121mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11579.643mil|Location2.X=11590.041mil|Location1.Y=6823.833mil|Location2.Y=6834.16mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11579.643mil|Location2.X=11590.041mil|Location1.Y=6823.833mil|Location2.Y=6834.16mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-59(20.458mm,70.474mm) on Bottom Layer And Track (20.091mm,71.548mm)(20.812mm,70.828mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11829.486mil|Location2.X=11839.813mil|Location1.Y=6782.5mil|Location2.Y=6792.898mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11829.486mil|Location2.X=11839.813mil|Location1.Y=6782.5mil|Location2.Y=6792.898mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-6(26.804mm,70.456mm) on Bottom Layer And Track (25.813mm,68.758mm)(27.158mm,70.103mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11578.307mil|Location2.X=11588.705mil|Location1.Y=6822.497mil|Location2.Y=6832.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11578.307mil|Location2.X=11588.705mil|Location1.Y=6822.497mil|Location2.Y=6832.824mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-60(20.812mm,70.828mm) on Bottom Layer And Track (16.83mm,74.103mm)(20.458mm,70.474mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11592.226mil|Location2.X=11602.624mil|Location1.Y=6836.416mil|Location2.Y=6846.743mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11592.226mil|Location2.X=11602.624mil|Location1.Y=6836.416mil|Location2.Y=6846.743mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-61(21.165mm,71.181mm) on Bottom Layer And Track (20.091mm,71.548mm)(20.812mm,70.828mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11633.929mil|Location2.X=11644.327mil|Location1.Y=6825.225mil|Location2.Y=6835.552mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11633.929mil|Location2.X=11644.327mil|Location1.Y=6825.225mil|Location2.Y=6835.552mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-61(21.165mm,71.181mm) on Bottom Layer And Track (21.519mm,71.535mm)(22.708mm,70.346mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11634.625mil|Location2.X=11645.023mil|Location1.Y=6852.368mil|Location2.Y=6862.695mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11634.625mil|Location2.X=11645.023mil|Location1.Y=6852.368mil|Location2.Y=6862.695mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-62(21.519mm,71.535mm) on Bottom Layer And Track (21.872mm,71.889mm)(21.88mm,71.889mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11646.512mil|Location2.X=11656.91mil|Location1.Y=6837.808mil|Location2.Y=6848.135mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11646.512mil|Location2.X=11656.91mil|Location1.Y=6837.808mil|Location2.Y=6848.135mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-63(21.872mm,71.889mm) on Bottom Layer And Track (21.519mm,71.535mm)(22.708mm,70.346mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11648.544mil|Location2.X=11658.942mil|Location1.Y=6866.287mil|Location2.Y=6876.614mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11648.544mil|Location2.X=11658.942mil|Location1.Y=6866.287mil|Location2.Y=6876.614mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-63(21.872mm,71.889mm) on Bottom Layer And Track (22.226mm,72.242mm)(22.226mm,72.249mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11647.425mil|Location2.X=11657.823mil|Location1.Y=6864.879mil|Location2.Y=6875.206mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11647.425mil|Location2.X=11657.823mil|Location1.Y=6864.879mil|Location2.Y=6875.206mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-64(22.226mm,72.242mm) on Bottom Layer And Track (21.872mm,71.889mm)(21.88mm,71.889mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11660.504mil|Location2.X=11670.902mil|Location1.Y=6851.8mil|Location2.Y=6862.127mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11660.504mil|Location2.X=11670.902mil|Location1.Y=6851.8mil|Location2.Y=6862.127mil|Absolute=True">Clearance Constraint: (0.193mm &lt; 0.203mm) Between Pad U1-64(22.226mm,72.242mm) on Bottom Layer And Track (21.88mm,71.889mm)(22.877mm,70.891mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11869.852mil|Location2.X=11880.179mil|Location1.Y=6795.028mil|Location2.Y=6805.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11869.852mil|Location2.X=11880.179mil|Location1.Y=6795.028mil|Location2.Y=6805.426mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-7(27.158mm,70.103mm) on Bottom Layer And Track (27.511mm,69.749mm)(30.237mm,72.475mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11842.069mil|Location2.X=11852.396mil|Location1.Y=6769.917mil|Location2.Y=6780.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11842.069mil|Location2.X=11852.396mil|Location1.Y=6769.917mil|Location2.Y=6780.315mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-8(27.511mm,69.749mm) on Bottom Layer And Track (25.813mm,68.758mm)(27.158mm,70.103mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11883.772mil|Location2.X=11894.099mil|Location1.Y=6781.108mil|Location2.Y=6791.506mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11883.772mil|Location2.X=11894.099mil|Location1.Y=6781.108mil|Location2.Y=6791.506mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-8(27.511mm,69.749mm) on Bottom Layer And Track (27.865mm,69.396mm)(30.486mm,72.018mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11882.435mil|Location2.X=11892.762mil|Location1.Y=6782.445mil|Location2.Y=6792.842mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11882.435mil|Location2.X=11892.762mil|Location1.Y=6782.445mil|Location2.Y=6792.842mil|Absolute=True">Clearance Constraint: (0.198mm &lt; 0.203mm) Between Pad U1-9(27.865mm,69.396mm) on Bottom Layer And Track (27.511mm,69.749mm)(30.237mm,72.475mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID2JC3PQYTO2TYKL2KK3FFXHK1ED0NQVDPWPFDGVI30VLXICFAACHM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.127mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10908.307mil|Location2.X=10914.557mil|Location1.Y=5386.838mil|Location2.Y=5393.088mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=10908.307mil|Location2.X=10914.557mil|Location1.Y=5386.838mil|Location2.Y=5393.088mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.015mm &lt; 0.127mm) Between Pad C12-1(3.254mm,33.63mm) on Top Layer And Via (3.226mm,34.798mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.015mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11006.212mil|Location2.X=11012.462mil|Location1.Y=5354.98mil|Location2.Y=5361.23mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11006.212mil|Location2.X=11012.462mil|Location1.Y=5354.98mil|Location2.Y=5361.23mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.014mm &lt; 0.127mm) Between Pad C12-2(5.004mm,33.63mm) on Top Layer And Via (6.121mm,33.63mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.014mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12071.514mil|Location2.X=12079.762mil|Location1.Y=6458.261mil|Location2.Y=6466.438mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12071.514mil|Location2.X=12079.762mil|Location1.Y=6458.261mil|Location2.Y=6466.438mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.061mm &lt; 0.127mm) Between Pad C4-1(32.407mm,61.242mm) on Bottom Layer And Via (33.042mm,61.972mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.061mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11660.145mil|Location2.X=11668.321mil|Location1.Y=6956.142mil|Location2.Y=6964.389mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11660.145mil|Location2.X=11668.321mil|Location1.Y=6956.142mil|Location2.Y=6964.389mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.071mm &lt; 0.127mm) Between Pad C6-1(21.914mm,74.721mm) on Bottom Layer And Via (22.631mm,73.99mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.071mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11248.133mil|Location2.X=11254.383mil|Location1.Y=5571.337mil|Location2.Y=5577.587mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11248.133mil|Location2.X=11254.383mil|Location1.Y=5571.337mil|Location2.Y=5577.587mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.068mm &lt; 0.127mm) Between Pad D5-1(12.492mm,39.126mm) on Top Layer And Via (11.472mm,39.125mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.068mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11247.811mil|Location2.X=11254.061mil|Location1.Y=5533.98mil|Location2.Y=5540.23mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11247.811mil|Location2.X=11254.061mil|Location1.Y=5533.98mil|Location2.Y=5540.23mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.084mm &lt; 0.127mm) Between Pad D5-2(12.492mm,38.176mm) on Top Layer And Via (11.455mm,38.176mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.084mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11514.804mil|Location2.X=11521.054mil|Location1.Y=6962.677mil|Location2.Y=6968.927mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11514.804mil|Location2.X=11521.054mil|Location1.Y=6962.677mil|Location2.Y=6968.927mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.025mm &lt; 0.127mm) Between Pad R1-2(18.596mm,73.708mm) on Bottom Layer And Via (18.618mm,74.879mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.025mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11894.841mil|Location2.X=11903.088mil|Location1.Y=5862.587mil|Location2.Y=5870.764mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=11894.841mil|Location2.X=11903.088mil|Location1.Y=5862.587mil|Location2.Y=5870.764mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.121mm &lt; 0.127mm) Between Pad R12-2(27.841mm,46.149mm) on Top Layer And Via (28.575mm,46.863mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.121mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12017.008mil|Location2.X=12023.258mil|Location1.Y=6830.811mil|Location2.Y=6837.061mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12017.008mil|Location2.X=12023.258mil|Location1.Y=6830.811mil|Location2.Y=6837.061mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.07mm &lt; 0.127mm) Between Pad R2-1(30.892mm,71.151mm) on Bottom Layer And Via (31.774mm,71.116mm) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [0.07mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12500.728mil|Location2.X=12506.978mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12500.728mil|Location2.X=12506.978mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.037mm &lt; 0.127mm) Between Pad U3-1(43.917mm,49.156mm) on Top Layer And Pad U3-2(43.43mm,49.156mm) on Top Layer [Top Solder] Mask Sliver [0.037mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12500.992mil|Location2.X=12507.242mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12500.992mil|Location2.X=12507.242mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.127mm) Between Pad U3-1(43.93mm,49.156mm) on Top Layer And Pad U3-2(43.43mm,49.156mm) on Top Layer [Top Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12481.307mil|Location2.X=12487.557mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12481.307mil|Location2.X=12487.557mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.127mm) Between Pad U3-2(43.43mm,49.156mm) on Top Layer And Pad U3-3(42.93mm,49.156mm) on Top Layer [Top Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12461.622mil|Location2.X=12467.872mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12461.622mil|Location2.X=12467.872mil|Location1.Y=5982.003mil|Location2.Y=5988.253mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.127mm) Between Pad U3-3(42.93mm,49.156mm) on Top Layer And Pad U3-4(42.43mm,49.156mm) on Top Layer [Top Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12461.622mil|Location2.X=12467.872mil|Location1.Y=5891.452mil|Location2.Y=5897.702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12461.622mil|Location2.X=12467.872mil|Location1.Y=5891.452mil|Location2.Y=5897.702mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.127mm) Between Pad U3-5(42.43mm,46.856mm) on Top Layer And Pad U3-6(42.93mm,46.856mm) on Top Layer [Top Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12481.307mil|Location2.X=12487.557mil|Location1.Y=5891.452mil|Location2.Y=5897.702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12481.307mil|Location2.X=12487.557mil|Location1.Y=5891.452mil|Location2.Y=5897.702mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.127mm) Between Pad U3-6(42.93mm,46.856mm) on Top Layer And Pad U3-7(43.43mm,46.856mm) on Top Layer [Top Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12500.992mil|Location2.X=12507.242mil|Location1.Y=5891.452mil|Location2.Y=5897.702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12500.992mil|Location2.X=12507.242mil|Location1.Y=5891.452mil|Location2.Y=5897.702mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.05mm &lt; 0.127mm) Between Pad U3-7(43.43mm,46.856mm) on Top Layer And Pad U3-8(43.93mm,46.856mm) on Top Layer [Top Solder] Mask Sliver [0.05mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12086.385mil|Location2.X=12097.424mil|Location1.Y=6387.48mil|Location2.Y=6394.76mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=E:\Project\Project_HJT\2505_IDS_DataLogger\2505_IDS_DL_BAT\2505_IDS_DL_BAT.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=12086.385mil|Location2.X=12097.424mil|Location1.Y=6387.48mil|Location2.Y=6394.76mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.125mm &lt; 0.127mm) Between Via (33.02mm,60.249mm) from Top Layer to Bottom Layer And Via (33.278mm,59.461mm) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [0.125mm] / [Bottom Solder] Mask Sliver [0.125mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
