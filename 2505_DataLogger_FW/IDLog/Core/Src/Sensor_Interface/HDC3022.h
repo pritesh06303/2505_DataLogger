@@ -8,7 +8,7 @@
 #ifndef SRC_SENSOR_INTERFACE_HDC3022_H_
 #define SRC_SENSOR_INTERFACE_HDC3022_H_
 
-#define SENSORREADLOADER				  5
+#define SENSORREADLOADER				  60//5
 #define uSHTC_Read_Delay 				  20
 #define ConfigurationRegisterCommand      0x02
 #define TempAndRhMeasurementCommand       0x00

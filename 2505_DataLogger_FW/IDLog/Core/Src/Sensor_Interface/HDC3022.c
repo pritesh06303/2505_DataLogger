@@ -93,7 +93,7 @@ bool ReadDataFromHdc (void)
 				TempAndHumidityData.TempAndHumidityData.ucTempAndRhDataBuffer[3] = ucDataReadBufferhdc[3];
 
 				TemperatureHumidityDataConversion();
-//				TemperatureToPercentageConversion ();
+
 				DataStatusMode = DataWriteMode;
 				bSHTC_read_complite = true;
 
@@ -137,9 +137,6 @@ void TemperatureHumidityDataConversion (void)
 
 	fHumidityData = (float)((((float)TempAndHumidityData.uiTempOrRHData[1])/65535)*100);
 //	fHumidityData =  ((fHumidityData * cal_para.MenuScaleCoefficient[1] ) + (cal_para.MenuOffsetCoefficient[1] ));
-
-	TemperatureToPercentageConversion();
-	HumidityToPercentageConversion();
 }
 
 

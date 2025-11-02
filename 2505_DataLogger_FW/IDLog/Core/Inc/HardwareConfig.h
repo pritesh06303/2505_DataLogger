@@ -16,8 +16,8 @@
 #include "math.h"
 
 #include "Main_App.h"
-#include "Timer.h"
 #include "HDC3022.h"
+#include "Timer.h"
 #include "EEPROM.h"
 
 
