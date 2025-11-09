@@ -28,6 +28,8 @@ bool bSHTC_Read_Delay = false;
 bool bSHTC_Sensor_Open = false;
 bool bSHTC_read_complite = false;
 uint8_t uSHTC_Delay_counter = uSHTC_Read_Delay;
+int CurrentTempData = 0;
+int CurrentRHData = 0;
 
 int32_t uSensorDateReadCounter = SENSORREADLOADER;
 
@@ -137,6 +139,9 @@ void TemperatureHumidityDataConversion (void)
 
 	fHumidityData = (float)((((float)TempAndHumidityData.uiTempOrRHData[1])/65535)*100);
 //	fHumidityData =  ((fHumidityData * cal_para.MenuScaleCoefficient[1] ) + (cal_para.MenuOffsetCoefficient[1] ));
+
+	CurrentTempData = (int) (fTemperatureData *100);
+	CurrentRHData = (int) (fHumidityData *100);
 }
 
 

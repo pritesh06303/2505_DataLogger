@@ -8,7 +8,7 @@
 #ifndef SRC_SENSOR_INTERFACE_HDC3022_H_
 #define SRC_SENSOR_INTERFACE_HDC3022_H_
 
-#define SENSORREADLOADER				  60//5
+#define SENSORREADLOADER				  5
 #define uSHTC_Read_Delay 				  20
 #define ConfigurationRegisterCommand      0x02
 #define TempAndRhMeasurementCommand       0x00
@@ -49,6 +49,8 @@ extern bool bSHTC_Sensor_Open;
 extern uint16_t uAVG_Couner;
 extern bool bSHTC_read_complite ;
 extern int32_t uSensorDateReadCounter;
+extern int CurrentTempData;
+extern int CurrentRHData;
 
 //==================================================================================================================================================
 //Function Name		: bool ReadDataFromHdc (void)

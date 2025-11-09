@@ -40,5 +40,12 @@ void MainAppWhileFunction (void)
 		}
 	}
 
+	if(bTimeRefreshDisplay == true)
+	{
+		UpdateDisplay();
+		RefreshDisplay();
+		bTimeRefreshDisplay = false;
+	}
+
 }
 

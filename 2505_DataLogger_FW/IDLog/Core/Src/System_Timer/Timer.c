@@ -162,11 +162,20 @@ void TimerInterrupt_500mSec_CallingFunction(void)
 //==================================================================================================================================================
 void TimerInterrupt_1Sec_CallingFunction(void)
 {
+//	bTimeRefreshDisplay = true; //this flag define temporary for testing
+
 	uSensorDateReadCounter--;
 	if(uSensorDateReadCounter <= 0)
 	{
 		uSensorDateReadCounter = SENSORREADLOADER;
 		bTimeToTakeSensor_Data = true;
+	}
+
+	ucDisplayRefreshCounter--;
+	if(ucDisplayRefreshCounter <= 0)
+	{
+		ucDisplayRefreshCounter = DISPLAYREFRESH_LCD_OFF;
+		bTimeRefreshDisplay = true;
 	}
 
 	bOne_Secend_Timer_Flag = true;
